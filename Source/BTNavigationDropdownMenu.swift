@@ -219,6 +219,21 @@ open class BTNavigationDropdownMenu: UIView {
             self.configuration.shouldChangeTitleText = value
         }
     }
+    
+    // The index value that is currently selected by the user
+    open var selectedIndex: Int? {
+        get {
+            return self.tableView.selectedIndexPath
+        }
+        set (value) {
+            self.tableView.selectedIndexPath = value
+            self.tableView.reloadData()
+            
+            if self.shouldChangeTitleText! {
+                self.setMenuTitle("\(self.tableView.items[value!])")
+            }
+        }
+    }
 
     open var didSelectItemAtIndexHandler: ((_ indexPath: Int) -> ())?
     open var isShown: Bool!
@@ -410,15 +425,6 @@ open class BTNavigationDropdownMenu: UIView {
         if !items.isEmpty {
             self.tableView.items = items
             self.tableView.reloadData()
-        }
-    }
-
-    open func setSelected(index: Int) {
-        self.tableView.selectedIndexPath = index
-        self.tableView.reloadData()
-
-        if self.shouldChangeTitleText! {
-            self.setMenuTitle("\(self.tableView.items[index])")
         }
     }
 
