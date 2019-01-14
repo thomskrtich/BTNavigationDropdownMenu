@@ -220,6 +220,15 @@ open class BTNavigationDropdownMenu: UIView {
         }
     }
     
+    open var menuTitleText: String? {
+        get {
+            return self.menuTitle.text
+        }
+        set (value) {
+            self.menuTitle.text = value
+        }
+    }
+    
     // The index value that is currently selected by the user
     open var selectedIndex: Int? {
         get {
@@ -230,7 +239,7 @@ open class BTNavigationDropdownMenu: UIView {
             self.tableView.reloadData()
             
             if self.shouldChangeTitleText! {
-                self.setMenuTitle("\(self.tableView.items[value!])")
+                self.menuTitleText = "\(self.tableView.items[value!])"
             }
         }
     }
@@ -364,7 +373,7 @@ open class BTNavigationDropdownMenu: UIView {
             }
             selfie.didSelectItemAtIndexHandler!(indexPath)
             if selfie.shouldChangeTitleText! {
-                selfie.setMenuTitle("\(selfie.tableView.items[indexPath])")
+                selfie.menuTitleText = "\(selfie.tableView.items[indexPath])"
             }
             self?.hideMenu()
             self?.layoutSubviews()
@@ -520,10 +529,6 @@ open class BTNavigationDropdownMenu: UIView {
                 selfie.menuArrow.transform = selfie.menuArrow.transform.rotated(by: 180 * CGFloat(Double.pi/180))
             }
         })
-    }
-    
-    func setMenuTitle(_ title: String) {
-        self.menuTitle.text = title
     }
     
     @objc func menuButtonTapped(_ sender: UIButton) {
