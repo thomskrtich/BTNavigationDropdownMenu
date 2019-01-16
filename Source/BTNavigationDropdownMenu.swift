@@ -244,6 +244,7 @@ open class BTNavigationDropdownMenu: UIView {
         }
     }
 
+    open var willSelectItemAtIndexHandler: ((_ indexPath: Int) -> ())?
     open var didSelectItemAtIndexHandler: ((_ indexPath: Int) -> ())?
     open var isShown: Bool!
 
@@ -371,10 +372,11 @@ open class BTNavigationDropdownMenu: UIView {
             guard let selfie = self else {
                 return
             }
-            selfie.didSelectItemAtIndexHandler!(indexPath)
+            selfie.willSelectItemAtIndexHandler!(indexPath)
             if selfie.shouldChangeTitleText! {
                 selfie.menuTitleText = "\(selfie.tableView.items[indexPath])"
             }
+            selfie.didSelectItemAtIndexHandler!(indexPath)
             self?.hideMenu()
             self?.layoutSubviews()
         }
