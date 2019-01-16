@@ -372,11 +372,11 @@ open class BTNavigationDropdownMenu: UIView {
             guard let selfie = self else {
                 return
             }
-            selfie.willSelectItemAtIndexHandler!(indexPath)
+            if (selfie.willSelectItemAtIndexHandler != nil) { selfie.willSelectItemAtIndexHandler!(indexPath) }
             if selfie.shouldChangeTitleText! {
                 selfie.menuTitleText = "\(selfie.tableView.items[indexPath])"
             }
-            selfie.didSelectItemAtIndexHandler!(indexPath)
+            if (selfie.didSelectItemAtIndexHandler != nil) { selfie.didSelectItemAtIndexHandler!(indexPath) }
             self?.hideMenu()
             self?.layoutSubviews()
         }
