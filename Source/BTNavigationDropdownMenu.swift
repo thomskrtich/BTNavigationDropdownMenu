@@ -235,7 +235,7 @@ open class BTNavigationDropdownMenu: UIView {
             return self.tableView.selectedIndexPath
         }
         set (value) {
-            if value > items.count { return }
+            if value! > items.count { return }
             self.tableView.selectedIndexPath = value
             self.tableView.reloadData()
             
