@@ -235,6 +235,7 @@ open class BTNavigationDropdownMenu: UIView {
             return self.tableView.selectedIndexPath
         }
         set (value) {
+            if value > items.count { return }
             self.tableView.selectedIndexPath = value
             self.tableView.reloadData()
             
@@ -287,7 +288,8 @@ open class BTNavigationDropdownMenu: UIView {
      - parameters:
         - navigationController: The present and visible navigation controller.
         - containerView: The container view. Default is keyWindow.
-        - title: An enum to define title to be displayed, can be a string or index of items.
+        - title: An enum to define title to be displayed, can be a string or index of 
+    
         - items: The array of items to select
      */
     public init(navigationController: UINavigationController? = nil, containerView: UIView = UIApplication.shared.keyWindow!, title: BTTitle, items: [String]) {
